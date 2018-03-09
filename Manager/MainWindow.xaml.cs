@@ -25,7 +25,7 @@ namespace Manager
             InitializeComponent();
 
             #if DEBUG
-            this.Topmost = true;  // For XAML debugging
+            //this.Topmost = true;  // For XAML debugging
             #endif
         }
     }

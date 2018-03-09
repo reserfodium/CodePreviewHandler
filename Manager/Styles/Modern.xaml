@@ -4,10 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="TitleBarBackgroundBrush" Color="#003054" />
-    <SolidColorBrush x:Key="ModernWindowBorderBrush" Color="#00000000" />
-    <SolidColorBrush x:Key="ModernWindowBorderBrushInactive" Color="#00000000" />
+    <SolidColorBrush x:Key="TitleBarBackgroundBrushInactive" Color="#001D33" />
     <SolidColorBrush x:Key="ModernWindowStatusForeground" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="ModernWindowStatusForegroundInactive" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ModernWindowStatusForegroundInactive" Color="#B2B2B2" />
 
     <Style x:Key="ModernTitleBarCloseButton" TargetType="{x:Type Button}">
         <!--  Common properties  -->
@@ -34,7 +33,7 @@
 
                         <!--  Pressed  -->
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="#960c17" />
+                            <Setter TargetName="Border" Property="Background" Value="#AF0E1E" />
                             <Setter Property="Foreground" Value="#FFF" />
                         </Trigger>
 
@@ -126,39 +125,45 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ModernWindowStyle" TargetType="{x:Type Window}">
+    <Style x:Key="ModernWindow" TargetType="{x:Type Window}">
+
+        <!--  Common properties  -->
         <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="ResizeMode" Value="NoResize" />
         <Setter Property="AllowsTransparency" Value="true" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+
+        <!--  WindowChrome  -->
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome
                     CaptionHeight="36"
                     GlassFrameThickness="0"
                     NonClientFrameEdges="None"
-                    ResizeBorderThickness="7" />
+                    ResizeBorderThickness="0" />
             </Setter.Value>
         </Setter>
-        <EventSetter Event="Loaded" Handler="WindowLoaded" />
+
+        <!--  Template  -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
+
+                    <!--  Window top  -->
                     <!--
                         7 is a magic number. By default Windows fits a maximized window with Margin
                         7 7 7 5 to fill entire screen (WPF .Net 4.5). Larger numbers produce a gap
                         between maximized window and screen edges; smaller numbers show parts of
                         the window outside of the current monitor on multi-display computers.
                     -->
-                    <Border x:Name="PART_Container" Padding="7,7,7,5">
+                    <Border Padding="7,7,7,5">
                         <Grid TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
                             <Border
-                                x:Name="PART_Border"
+                                x:Name="Border"
                                 Width="Auto"
                                 Height="Auto"
                                 Padding="0"
                                 Background="#EFEFF2"
-                                BorderBrush="{StaticResource ModernWindowBorderBrush}"
                                 BorderThickness="1">
                                 <DockPanel
                                     HorizontalAlignment="Stretch"
@@ -169,106 +174,66 @@
                                         Background="{StaticResource TitleBarBackgroundBrush}"
                                         BorderThickness="0"
                                         DockPanel.Dock="Top">
+
+                                        <!--  Window caption  -->
                                         <Grid Height="36">
+
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto" />
-                                                <ColumnDefinition />
-                                                <ColumnDefinition Width="auto" />
-                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="auto" />
                                             </Grid.ColumnDefinitions>
-                                            <Image
-                                                x:Name="Icon"
-                                                Grid.Column="0"
-                                                Width="0"
-                                                Height="0"
-                                                Margin="4,-7,0,7"
-                                                HorizontalAlignment="Right"
-                                                MouseLeftButtonDown="IconMouseLeftButtonDown"
-                                                MouseUp="IconMouseUp"
-                                                Source="{Binding Path=Icon, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                                WindowChrome.IsHitTestVisibleInChrome="True" />
+
+                                            <!--  Text caption  -->
                                             <TextBlock
                                                 x:Name="Caption"
-                                                Grid.Column="1"
-                                                Margin="7,0,0,0"
+                                                Grid.Column="0"
+                                                Margin="8,0,0,0"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Center"
                                                 FontFamily="Segoe UI"
                                                 FontSize="12"
-                                                Foreground="White"
-                                                Opacity="0.9"
+                                                Foreground="#F2F2F2"
                                                 Text="{Binding Path=Title, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                                            <Button
-                                                x:Name="MinButton"
-                                                Grid.Column="3"
-                                                Width="0"
-                                                Height="0"
-                                                VerticalAlignment="Top"
-                                                Click="MinButtonClick"
-                                                Foreground="White"
-                                                Style="{StaticResource ModernTitleBarCloseButton}"
-                                                WindowChrome.IsHitTestVisibleInChrome="True">
-                                                <Grid MaxWidth="9" MaxHeight="9">
-                                                    <Path
-                                                        Data="M0,8 H8 M0,7 H8 M0,6 H8"
-                                                        RenderOptions.EdgeMode="Aliased"
-                                                        Stretch="None"
-                                                        Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
-                                                        StrokeThickness="1" />
-                                                </Grid>
-                                            </Button>
-                                            <Button
-                                                x:Name="MaxButton"
-                                                Grid.Column="3"
-                                                Width="0"
-                                                Height="0"
-                                                VerticalAlignment="Top"
-                                                Click="MaxButtonClick"
-                                                Style="{StaticResource ModernTitleBarCloseButton}"
-                                                WindowChrome.IsHitTestVisibleInChrome="True">
-                                                <Grid MaxWidth="9" MaxHeight="9">
-                                                    <Path
-                                                        x:Name="PART_MaxButton_Path"
-                                                        Data="M0,0 H8 V8 H0 V0 M0,1 H8 M0,2 H8"
-                                                        RenderOptions.EdgeMode="Aliased"
-                                                        Stretch="None"
-                                                        Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
-                                                        StrokeThickness="1" />
-                                                </Grid>
-                                            </Button>
+
+                                            <!--  Close Button  -->
                                             <Button
                                                 x:Name="CloseButton"
-                                                Grid.Column="4"
-                                                Width="42"
+                                                Grid.Column="1"
+                                                Width="44"
                                                 Height="36"
                                                 Click="CloseButtonClick"
                                                 Foreground="White"
                                                 Style="{StaticResource ModernTitleBarCloseButton}"
                                                 WindowChrome.IsHitTestVisibleInChrome="True">
                                                 <Grid MaxWidth="42" MaxHeight="9">
+
+                                                    <!--  Vector icon  -->
                                                     <Path
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center"
                                                         Data="M11.458-10.886,7.078-6.5l4.38,4.386-.571.571L6.5-5.922,2.114-1.542l-.571-.571L5.922-6.5l-4.38-4.386.571-.571L6.5-7.078l4.386-4.38Z"
                                                         Stretch="Uniform"
                                                         Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
-                                                        StrokeThickness="0.7" />
+                                                        StrokeThickness="0.6" />
+
                                                 </Grid>
                                             </Button>
+
                                         </Grid>
+
                                     </Border>
                                     <ContentPresenter />
                                 </DockPanel>
                             </Border>
                         </Grid>
                     </Border>
+
+                    <!--  Triggers  -->
                     <ControlTemplate.Triggers>
-                        <Trigger Property="WindowState" Value="Maximized">
-                            <Setter TargetName="PART_MaxButton_Path" Property="Data" Value="M0,3 H5 V8 H0 V3 M0,4 H5 M3,0 H8 V5 H7 M3,1 H8" />
-                        </Trigger>
+
+                        <!--  Shadow effect  -->
                         <Trigger Property="WindowState" Value="Normal">
-                            <Setter TargetName="PART_Border" Property="Effect">
+                            <Setter TargetName="Border" Property="Effect">
                                 <Setter.Value>
                                     <DropShadowEffect
                                         BlurRadius="7"
@@ -279,28 +244,19 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
+
+                        <!--  Inactive window properties  -->
                         <Trigger Property="IsActive" Value="False">
-                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{StaticResource ModernWindowBorderBrushInactive}" />
+                            <Setter TargetName="Caption" Property="Foreground" Value="{StaticResource ModernWindowStatusForegroundInactive}" />
+                            <Setter TargetName="CloseButton" Property="Foreground" Value="{StaticResource ModernWindowStatusForegroundInactive}" />
+                            <Setter TargetName="TitleBar" Property="Background" Value="{StaticResource TitleBarBackgroundBrushInactive}" />
                         </Trigger>
+
                     </ControlTemplate.Triggers>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Resources>
-            <Style TargetType="{x:Type StatusBar}">
-                <Setter Property="Foreground" Value="{StaticResource ModernWindowStatusForeground}" />
-                <Setter Property="Background" Value="{StaticResource ModernWindowBorderBrush}" />
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsActive, RelativeSource={RelativeSource AncestorType=Window}}" Value="False">
-                        <Setter Property="Foreground" Value="{StaticResource ModernWindowStatusForegroundInactive}" />
-                        <Setter Property="Background" Value="{StaticResource ModernWindowBorderBrushInactive}" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-            <Style TargetType="{x:Type ResizeGrip}">
-                <Setter Property="WindowChrome.ResizeGripDirection" Value="BottomRight" />
-            </Style>
-        </Style.Resources>
     </Style>
 
 </ResourceDictionary>

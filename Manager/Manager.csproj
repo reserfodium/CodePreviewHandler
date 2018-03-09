@@ -101,5 +101,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Tools\CLRegAsmLib.dll" />
+    <Content Include="Tools\gacutil.exe" />
+    <Content Include="Tools\regasm.exe" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

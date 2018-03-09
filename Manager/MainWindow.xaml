@@ -5,8 +5,7 @@
     Title="Code Preview Shell Extension"
     Width="380"
     Height="540"
-    ResizeMode="NoResize"
-    Style="{StaticResource ModernWindowStyle}">
+    Style="{StaticResource ModernWindow}">
 
     <Grid>
         <Grid.RowDefinitions>
