@@ -9,6 +9,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Modern.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="FabricUI">pack://application:,,,/Fonts/#Fabric External MDL2 Assets</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

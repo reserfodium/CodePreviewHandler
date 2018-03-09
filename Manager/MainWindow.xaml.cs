@@ -23,6 +23,10 @@ namespace Manager
         public MainWindow()
         {
             InitializeComponent();
+
+            #if DEBUG
+            this.Topmost = true;  // For XAML debugging
+            #endif
         }
     }
 }

@@ -33,11 +33,20 @@
                 VerticalAlignment="Center"
                 Orientation="Horizontal">
                 <Button
-                    Width="78"
+                    x:Name="InstallButton"
+                    Width="84"
                     Margin="0,0,8,0"
-                    Content="Install"
-                    Style="{StaticResource ModernButton}" />
+                    Style="{StaticResource ModernPrimaryButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource FabricUI}"
+                            Text="&#xEA18;" />
+                        <TextBlock Margin="4,0,0,0" Text="Install" />
+                    </StackPanel>
+                </Button>
                 <Button
+                    x:Name="UninstallButton"
                     Width="84"
                     Margin="0,0,12,0"
                     Content="Uninstall"
