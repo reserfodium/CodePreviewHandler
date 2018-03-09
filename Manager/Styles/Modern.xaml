@@ -10,24 +10,34 @@
     <SolidColorBrush x:Key="ModernWindowStatusForegroundInactive" Color="#FFFFFF" />
 
     <Style x:Key="ModernTitleBarCloseButton" TargetType="{x:Type Button}">
+        <!--  Common properties  -->
         <Setter Property="Focusable" Value="false" />
+
+        <!--  Template  -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
+
+                    <!--  Content  -->
                     <Grid>
                         <Border x:Name="Border" Background="Transparent" />
                         <ContentPresenter />
                     </Grid>
+
+                    <!--  Triggers  -->
                     <ControlTemplate.Triggers>
+
                         <!--  Hover  -->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="#e81123" />
                         </Trigger>
+
                         <!--  Pressed  -->
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="#960c17" />
                             <Setter Property="Foreground" Value="#FFF" />
                         </Trigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -35,29 +45,40 @@
     </Style>
 
     <Style x:Key="ModernButton" TargetType="{x:Type Button}">
+
+        <!--  Common properties  -->
         <Setter Property="Height" Value="30" />
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Foreground" Value="#333333" />
         <Setter Property="Focusable" Value="false" />
+
+        <!--  Template  -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
+
+                    <!--  Content  -->
                     <Grid>
                         <Border x:Name="Border" Background="#DADADA" />
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
+
+                    <!--  Triggers  -->
                     <ControlTemplate.Triggers>
+
                         <!--  Hover  -->
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="Border" Property="Background" Value="#C8C8C8" />
                             <Setter Property="Foreground" Value="#333333" />
                         </Trigger>
+
                         <!--  Pressed  -->
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="Border" Property="Background" Value="#A6A6A6" />
                             <Setter Property="Foreground" Value="#212121" />
                         </Trigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

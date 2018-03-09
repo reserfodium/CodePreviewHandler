@@ -14,6 +14,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <!--  Subtitle  -->
         <Grid
             Grid.Row="0"
             Height="48"
@@ -26,6 +27,7 @@
                 Foreground="White"
                 Text="INSTALLER" />
 
+            <!--  Buttons  -->
             <StackPanel
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
@@ -43,5 +45,14 @@
             </StackPanel>
         </Grid>
 
+        <!--  Content  -->
+        <Grid Grid.Row="1">
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontFamily="Segoe UI"
+                FontSize="18"
+                Text="Coming Soon..." />
+        </Grid>
     </Grid>
 </Window>
