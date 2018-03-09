@@ -32,23 +32,13 @@
                 Orientation="Horizontal">
                 <Button
                     Width="78"
-                    Height="30"
                     Margin="0,0,8,0"
-                    Padding="16,0"
-                    HorizontalAlignment="Center"
                     Content="Install"
-                    FontFamily="Segoe UI"
-                    FontSize="14"
                     Style="{StaticResource ModernButton}" />
                 <Button
                     Width="84"
-                    Height="30"
                     Margin="0,0,12,0"
-                    Padding="12,0"
-                    HorizontalAlignment="Center"
                     Content="Uninstall"
-                    FontFamily="Segoe UI"
-                    FontSize="14"
                     Style="{StaticResource ModernButton}" />
             </StackPanel>
         </Grid>
