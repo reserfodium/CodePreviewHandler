@@ -24,7 +24,6 @@ Extensions | Description
 .lua | Lua
 
 # How to install #
-
 1. Download the latest release from [CodePreviewHandler releases on GitHub](https://github.com/reserfodium/CodePreviewHandler/releases "CodePreviewHandler on GitHub")
 2. Extract it
 3. Run Install.bat from the cmd.exe (with admin privileges).
