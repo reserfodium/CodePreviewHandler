@@ -62,7 +62,6 @@
         '\''};
             this.fctb.AutoScrollMinSize = new System.Drawing.Size(40, 15);
             this.fctb.AutoSize = true;
-            this.fctb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.fctb.BackBrush = null;
             this.fctb.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
             this.fctb.CharHeight = 15;
