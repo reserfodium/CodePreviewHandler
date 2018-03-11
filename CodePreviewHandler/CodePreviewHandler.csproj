@@ -105,4 +105,11 @@
     <None Include="Key.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Release (
+    if not exist "$(SolutionDir)Build" mkdir "$(SolutionDir)Build"
+    copy "$(TargetDir)" "$(SolutionDir)Build"
+    del "$(SolutionDir)Build\*.pdb"
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

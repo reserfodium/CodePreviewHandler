@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -102,9 +105,20 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Tools\CLRegAsmLib.dll" />
-    <Content Include="Tools\gacutil.exe" />
-    <Content Include="Tools\regasm.exe" />
+    <None Include="Tools\CLRegAsmLib.dll" />
+    <None Include="Tools\gacutil.exe" />
+    <None Include="Tools\regasm.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Release (
+    if not exist "$(SolutionDir)Build" mkdir "$(SolutionDir)Build"
+    if not exist "$(SolutionDir)Build\Tools" mkdir "$(SolutionDir)Build\Tools"
+    
+    copy "$(TargetDir)\Manager.exe" "$(SolutionDir)Build"
+    xcopy "$(ProjectDir)\Tools" "$(SolutionDir)Build\Tools"
+    
+    del "$(SolutionDir)Build\*.pdb"
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
