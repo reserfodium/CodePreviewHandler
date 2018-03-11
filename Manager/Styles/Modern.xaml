@@ -259,4 +259,139 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ModernDialog" TargetType="{x:Type Window}">
+
+        <!--  Common properties  -->
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="ShowInTaskbar" Value="false" />
+        <Setter Property="AllowsTransparency" Value="true" />
+        <Setter Property="Background" Value="Transparent" />
+
+        <!--  WindowChrome  -->
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome
+                    CaptionHeight="30"
+                    GlassFrameThickness="0"
+                    NonClientFrameEdges="None"
+                    ResizeBorderThickness="0" />
+            </Setter.Value>
+        </Setter>
+
+        <!--  Template  -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+
+                    <!--  Window top  -->
+                    <!--
+                        7 is a magic number. By default Windows fits a maximized window with Margin
+                        7 7 7 5 to fill entire screen (WPF .Net 4.5). Larger numbers produce a gap
+                        between maximized window and screen edges; smaller numbers show parts of
+                        the window outside of the current monitor on multi-display computers.
+                    -->
+                    <Border Padding="7,7,7,5">
+                        <Grid TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
+                            <Border
+                                x:Name="Border"
+                                Width="Auto"
+                                Height="Auto"
+                                Padding="0"
+                                Background="#EFEFF2"
+                                BorderThickness="1">
+                                <DockPanel
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="Transparent">
+                                    <Border
+                                        x:Name="TitleBar"
+                                        Background="{StaticResource TitleBarBackgroundBrush}"
+                                        BorderThickness="0"
+                                        DockPanel.Dock="Top">
+
+                                        <!--  Window caption  -->
+                                        <Grid Height="30">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--  Text caption  -->
+                                            <TextBlock
+                                                x:Name="Caption"
+                                                Grid.Column="0"
+                                                Margin="8,0,0,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                FontFamily="Segoe UI"
+                                                FontSize="12"
+                                                Foreground="#F2F2F2"
+                                                Text="{Binding Path=Title, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                                            <!--  Close Button  -->
+                                            <Button
+                                                x:Name="CloseButton"
+                                                Grid.Column="1"
+                                                Width="30"
+                                                Height="30"
+                                                Click="CloseButtonClick"
+                                                Foreground="White"
+                                                Style="{StaticResource ModernTitleBarCloseButton}"
+                                                WindowChrome.IsHitTestVisibleInChrome="True">
+                                                <Grid MaxWidth="42" MaxHeight="9">
+
+                                                    <!--  Vector icon  -->
+                                                    <Path
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Data="M11.458-10.886,7.078-6.5l4.38,4.386-.571.571L6.5-5.922,2.114-1.542l-.571-.571L5.922-6.5l-4.38-4.386.571-.571L6.5-7.078l4.386-4.38Z"
+                                                        Stretch="Uniform"
+                                                        Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                                                        StrokeThickness="0.6" />
+
+                                                </Grid>
+                                            </Button>
+
+                                        </Grid>
+
+                                    </Border>
+                                    <ContentPresenter />
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!--  Triggers  -->
+                    <ControlTemplate.Triggers>
+
+                        <!--  Shadow effect  -->
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter TargetName="Border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect
+                                        BlurRadius="7"
+                                        Direction="315"
+                                        Opacity="0.5"
+                                        ShadowDepth="2"
+                                        Color="black" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <!--  Inactive window properties  -->
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter TargetName="Caption" Property="Foreground" Value="{StaticResource ModernWindowStatusForegroundInactive}" />
+                            <Setter TargetName="CloseButton" Property="Foreground" Value="{StaticResource ModernWindowStatusForegroundInactive}" />
+                            <Setter TargetName="TitleBar" Property="Background" Value="{StaticResource TitleBarBackgroundBrushInactive}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

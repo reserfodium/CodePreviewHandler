@@ -58,7 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogs\InstallationDialog.xaml.cs">
+      <DependentUpon>InstallationDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Styles\Modern.cs" />
+    <Page Include="Dialogs\InstallationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
