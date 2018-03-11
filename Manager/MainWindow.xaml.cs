@@ -1,30 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Manager.Dialogs.InstallationDialog;
+using System;
+using System.Diagnostics;
+using System.Security.Principal;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Manager
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        #region Data
+
+        static string RegAsmBinary = "regasm.exe";
+        static string GacUtilBinary = "gacutil.exe";
+
+        static string LibraryName = "CodePreviewHandler.dll";
+        static string DependencyName = "FastColoredTextBox.dll";
+
+        #endregion
+
         public MainWindow()
         {
             InitializeComponent();
-
-            new Dialogs.InstallationDialog().Show();
         }
+
+        #region Functions
+
+        private bool RunCommand(string cmd)
+        {
+            try
+            {
+                ProcessStartInfo procStartInfo =
+                    new ProcessStartInfo("cmd", "/c " + cmd)
+                    {
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
+
+                Process proc = new System.Diagnostics.Process();
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+                
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void InstallCodePreviewHandler(Installation installationOption)
+        {
+            #region GAC
+
+            string cmd = GacUtilBinary + " /if ";
+
+            RunCommand(cmd + LibraryName);
+            RunCommand(cmd + DependencyName);
+
+            #endregion
+
+            string regasm = 
+                RegAsmBinary +
+                (installationOption == Installation.ForCurrentUser ? " /U " : " ") +
+                LibraryName;
+
+            RunCommand(regasm);
+        }
+
+        #endregion
+
+        #region Events
+
+        private void InstallButton_Click(object sender, RoutedEventArgs e)
+        {
+            var installationDialog = new InstallationDialog(this);
+            installationDialog.ShowDialog();
+
+            if (installationDialog.DialogResult == Installation.ForAllUsers &&
+                !new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
+            {
+
+            }
+
+            InstallCodePreviewHandler(installationDialog.DialogResult);
+        }
+
+        private void UninstallButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }

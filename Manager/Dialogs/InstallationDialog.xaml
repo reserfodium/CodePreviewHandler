@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="Manager.Dialogs.InstallationDialog"
+    x:Class="Manager.Dialogs.InstallationDialog.InstallationDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title=""
@@ -12,6 +12,7 @@
         <Button
             x:Name="InstallForAllUsersButton"
             Margin="4,4,4,2"
+            Click="InstallForAllUsersButton_Click"
             Style="{StaticResource ModernPrimaryButton}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock
@@ -24,6 +25,7 @@
         <Button
             x:Name="InstallForCurrentUserButton"
             Margin="4,2,4,4"
+            Click="InstallForCurrentUserButton_Click"
             Content="Install for current user"
             Style="{StaticResource ModernButton}" />
     </StackPanel>

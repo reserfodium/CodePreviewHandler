@@ -1,27 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
-namespace Manager.Dialogs
+namespace Manager.Dialogs.InstallationDialog
 {
-    /// <summary>
-    /// Логика взаимодействия для InstallationDialog.xaml
-    /// </summary>
+    public enum Installation
+    {
+        ForAllUsers,
+        ForCurrentUser
+    }
+
     public partial class InstallationDialog : Window
     {
-        public InstallationDialog()
+        public new Installation DialogResult
         {
+            get;
+            private set;
+        }
+
+        public InstallationDialog(Window owner)
+        {
+            Owner = owner;
+
             InitializeComponent();
         }
+
+        #region Functions
+
+        private void CloseDialog(Installation i)
+        {
+            DialogResult = i;
+            Hide();
+        }
+
+        #endregion
+
+        #region Events
+
+        private void InstallForAllUsersButton_Click(object sender, RoutedEventArgs e)
+            => CloseDialog(Installation.ForAllUsers);
+
+        private void InstallForCurrentUserButton_Click(object sender, RoutedEventArgs e)
+            => CloseDialog(Installation.ForCurrentUser);
+
+        #endregion
     }
 }

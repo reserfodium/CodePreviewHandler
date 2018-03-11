@@ -8,7 +8,45 @@
     <SolidColorBrush x:Key="ModernWindowStatusForeground" Color="#FFFFFF" />
     <SolidColorBrush x:Key="ModernWindowStatusForegroundInactive" Color="#B2B2B2" />
 
+    <SolidColorBrush x:Key="DialogTitleBarBackgroundBrush" Color="#003054" />
+    <SolidColorBrush x:Key="DialogTitleBarBackgroundBrushInactive" Color="#001D33" />
+
     <Style x:Key="ModernTitleBarCloseButton" TargetType="{x:Type Button}">
+        <!--  Common properties  -->
+        <Setter Property="Focusable" Value="false" />
+
+        <!--  Template  -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <!--  Content  -->
+                    <Grid>
+                        <Border x:Name="Border" Background="Transparent" />
+                        <ContentPresenter />
+                    </Grid>
+
+                    <!--  Triggers  -->
+                    <ControlTemplate.Triggers>
+
+                        <!--  Hover  -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#e81123" />
+                        </Trigger>
+
+                        <!--  Pressed  -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#AF0E1E" />
+                            <Setter Property="Foreground" Value="#FFF" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ModernDialogTitleBarCloseButton" TargetType="{x:Type Button}">
         <!--  Common properties  -->
         <Setter Property="Focusable" Value="false" />
 
@@ -298,7 +336,7 @@
                                 Width="Auto"
                                 Height="Auto"
                                 Padding="0"
-                                Background="#EFEFF2"
+                                Background="{StaticResource DialogTitleBarBackgroundBrush}"
                                 BorderThickness="1">
                                 <DockPanel
                                     HorizontalAlignment="Stretch"
@@ -306,7 +344,6 @@
                                     Background="Transparent">
                                     <Border
                                         x:Name="TitleBar"
-                                        Background="{StaticResource TitleBarBackgroundBrush}"
                                         BorderThickness="0"
                                         DockPanel.Dock="Top">
 
@@ -315,7 +352,7 @@
 
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="30" />
                                             </Grid.ColumnDefinitions>
 
                                             <!--  Text caption  -->
@@ -327,18 +364,20 @@
                                                 VerticalAlignment="Center"
                                                 FontFamily="Segoe UI"
                                                 FontSize="12"
-                                                Foreground="#F2F2F2"
+                                                Foreground="{StaticResource DialogTitleBarBackgroundBrush}"
                                                 Text="{Binding Path=Title, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
 
                                             <!--  Close Button  -->
                                             <Button
                                                 x:Name="CloseButton"
                                                 Grid.Column="1"
-                                                Width="30"
-                                                Height="30"
+                                                Width="22"
+                                                Height="22"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
                                                 Click="CloseButtonClick"
                                                 Foreground="White"
-                                                Style="{StaticResource ModernTitleBarCloseButton}"
+                                                Style="{StaticResource ModernDialogTitleBarCloseButton}"
                                                 WindowChrome.IsHitTestVisibleInChrome="True">
                                                 <Grid MaxWidth="42" MaxHeight="9">
 
@@ -384,7 +423,7 @@
                         <Trigger Property="IsActive" Value="False">
                             <Setter TargetName="Caption" Property="Foreground" Value="{StaticResource ModernWindowStatusForegroundInactive}" />
                             <Setter TargetName="CloseButton" Property="Foreground" Value="{StaticResource ModernWindowStatusForegroundInactive}" />
-                            <Setter TargetName="TitleBar" Property="Background" Value="{StaticResource TitleBarBackgroundBrushInactive}" />
+                            <Setter TargetName="TitleBar" Property="Background" Value="{StaticResource DialogTitleBarBackgroundBrushInactive}" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>
