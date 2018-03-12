@@ -4,21 +4,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title=""
     Width="300"
-    Height="144"
+    Height="180"
     Style="{StaticResource ModernDialog}"
     WindowStartupLocation="CenterOwner">
 
     <Grid Background="#EEEEEE">
+        <Image
+            Name="Img"
+            Width="48"
+            Height="48"
+            Margin="10,8,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
         <TextBlock
-            Margin="48,0,0,0"
-            Text="You have not admin privileges for this. Please restart app with needed rights"
+            Name="Text"
+            Margin="63,0,0,47"
+            Padding="4,20,4,4"
+            FontSize="16"
             TextWrapping="Wrap" />
         <Button
-            x:Name="InstallForCurrentUserButton"
-            Width="72"
-            Margin="202,58,10,10"
-            Click="InstallForCurrentUserButton_Click"
-            Content="Ok"
+            Margin="101,94,101,10"
+            Click="Button_Click"
+            Content="OK"
             Style="{StaticResource ModernButton}" />
     </Grid>
 

@@ -1,4 +1,5 @@
-﻿using Manager.Dialogs.InstallationDialog;
+﻿using Manager.Dialogs;
+using Manager.Dialogs.InstallationDialog;
 using System;
 using System.Diagnostics;
 using System.Security.Principal;
@@ -74,16 +75,8 @@ namespace Manager
 
         private void InstallButton_Click(object sender, RoutedEventArgs e)
         {
-            var installationDialog = new InstallationDialog(this);
-            installationDialog.ShowDialog();
-
-            if (installationDialog.DialogResult == Installation.ForAllUsers &&
-                !new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
-            {
-
-            }
-
-            InstallCodePreviewHandler(installationDialog.DialogResult);
+            var dlg = new OkDialog(this);
+            dlg.ShowDialog(Properties.Resources._1, "Test dialog");
         }
 
         private void UninstallButton_Click(object sender, RoutedEventArgs e)
