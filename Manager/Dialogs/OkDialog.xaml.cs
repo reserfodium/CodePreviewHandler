@@ -7,12 +7,10 @@ using System.Windows.Media.Imaging;
 
 namespace Manager.Dialogs
 {
-    public partial class OkDialog : Window
+    public partial class OkDialog : ModernDialog
     {
-        public OkDialog(Window owner)
+        public OkDialog(Window owner) : base(owner)
         {
-            Owner = owner;
-
             InitializeComponent();
         }
         

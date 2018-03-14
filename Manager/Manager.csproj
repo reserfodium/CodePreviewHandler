@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogs\ModernDialog.cs" />
     <Compile Include="Dialogs\OkDialog.xaml.cs">
       <DependentUpon>OkDialog.xaml</DependentUpon>
     </Compile>
@@ -87,6 +88,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Styles\Modern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
