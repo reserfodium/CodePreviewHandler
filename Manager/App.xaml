@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/Modern.xaml" />
+                <ResourceDictionary Source="Styles/Modern/Modern.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <FontFamily x:Key="FabricUI">pack://application:,,,/Fonts/#Fabric External MDL2 Assets</FontFamily>

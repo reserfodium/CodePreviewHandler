@@ -76,7 +76,7 @@ namespace Manager
         private void InstallButton_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OkDialog(this);
-            dlg.ShowDialog(Properties.Resources._1, "Test dialog");
+            dlg.ShowDialog(Properties.Resources.Error, "Test dialog");
         }
 
         private void UninstallButton_Click(object sender, RoutedEventArgs e)
