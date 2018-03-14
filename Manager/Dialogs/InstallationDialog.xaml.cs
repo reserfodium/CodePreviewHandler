@@ -8,7 +8,7 @@ namespace Manager.Dialogs.InstallationDialog
         ForCurrentUser
     }
 
-    public partial class InstallationDialog : Window
+    public partial class InstallationDialog : ModernDialog
     {
         public new Installation DialogResult
         {
@@ -16,7 +16,7 @@ namespace Manager.Dialogs.InstallationDialog
             private set;
         }
 
-        public InstallationDialog(Window owner)
+        public InstallationDialog(Window owner) : base(owner)
         {
             Owner = owner;
 

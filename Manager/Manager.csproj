@@ -124,7 +124,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\1.png" />
+    <Content Include="Resources\Error.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Tools\CLRegAsmLib.dll" />
@@ -132,10 +132,10 @@
     <None Include="Tools\regasm.exe" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\2.png" />
+    <Content Include="Resources\Warning.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\3.png" />
+    <Content Include="Resources\Access.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
