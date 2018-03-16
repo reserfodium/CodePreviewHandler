@@ -20,6 +20,11 @@ namespace Manager.Dialogs
             Img.Source = MessageIcon;
         }
 
+        public new void ShowDialog()
+        {
+            base.ShowDialog();
+        }
+
         #region Events
 
         private void Button_Click(object sender, RoutedEventArgs e) => Hide();

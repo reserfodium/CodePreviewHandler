@@ -11,11 +11,7 @@ namespace Manager.Dialogs.InstallationDialog
 
     public partial class InstallationDialog : ModernDialog
     {
-        public new Installation DialogResult
-        {
-            get;
-            private set;
-        }
+        public new Installation DialogResult { get; private set; }
 
         public InstallationDialog(Window owner) : base(
             message: "",
@@ -26,6 +22,12 @@ namespace Manager.Dialogs.InstallationDialog
         }
 
         #region Functions
+
+        public new Installation ShowDialog()
+        {
+            base.ShowDialog();
+            return DialogResult;
+        }
 
         private void CloseDialog(Installation i)
         {
