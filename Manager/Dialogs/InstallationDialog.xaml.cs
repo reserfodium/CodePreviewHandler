@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Drawing;
+using System.Windows;
 
 namespace Manager.Dialogs.InstallationDialog
 {
@@ -16,10 +17,11 @@ namespace Manager.Dialogs.InstallationDialog
             private set;
         }
 
-        public InstallationDialog(Window owner) : base(owner)
+        public InstallationDialog(Window owner) : base(
+            message: "",
+            messageIcon: null,
+            owner: owner)
         {
-            Owner = owner;
-
             InitializeComponent();
         }
 

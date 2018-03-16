@@ -9,45 +9,16 @@ namespace Manager.Dialogs
 {
     public partial class OkDialog : ModernDialog
     {
-        public OkDialog(Window owner) : base(owner)
+        public OkDialog(string message, Bitmap messageIcon, Window owner) : base(
+            message: message,
+            messageIcon: messageIcon,
+            owner: owner)
         {
             InitializeComponent();
+
+            Text.Text = Message;
+            Img.Source = MessageIcon;
         }
-        
-        #region Functions
-
-        public bool ShowDialog(Bitmap bitmap, string text)
-        {
-            Img.Source = LoadBitmap(bitmap);
-            Text.Text = text;
-
-            ShowDialog();
-
-            return true;
-        }
-
-        [DllImport("gdi32")]
-        static extern int DeleteObject(IntPtr o);
-
-        public static BitmapSource LoadBitmap(System.Drawing.Bitmap source)
-        {
-            IntPtr ip = source.GetHbitmap();
-            BitmapSource bs = null;
-            try
-            {
-                bs = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(ip,
-                   IntPtr.Zero, Int32Rect.Empty,
-                   System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
-            }
-            finally
-            {
-                DeleteObject(ip);
-            }
-
-            return bs;
-        }
-
-        #endregion
 
         #region Events
 
